@@ -1,0 +1,15 @@
+[nmt_server] # Group Name
+# Testing 40
+# 192.168.50.26 ansible_ssh_user=training ansible_ssh_private_key_file=id_rsa ansible_ssh_port=6500 server_id=26
+# Beijing
+# 221.122.93.185 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=22 server_id=185
+# 221.122.93.186 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=22 server_id=186
+# 221.122.93.187 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=22 server_id=187
+# Shenzhen
+192.168.50.6 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=6500 server_id=6
+192.168.50.10 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=10086 server_id=10
+192.168.50.11 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=10086 server_id=11
+# 192.168.50.12 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=10086 server_id=12
+# 192.168.50.13 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=10086 server_id=13
+# 192.168.50.18 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=10086 server_id=18
+# 192.168.50.19 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=10086 server_id=19

@@ -1,0 +1,12 @@
+- hosts: nmt_server
+  vars:
+      user_name: newtranx
+      decoder_version: 8.0.7
+      dest_decoder_path: /home/{{user_name}}/decoder
+      localhost_decoder_path: /home/newtranx/decoder
+      #target_volume: 2001
+  tasks:
+    - name: 1.Restart dockers
+      shell: "./remove_online.sh {{target_volume}} {{decoder_version}}"
+      args:
+       chdir: "{{ dest_decoder_path }}"
