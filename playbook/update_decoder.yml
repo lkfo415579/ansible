@@ -1,7 +1,7 @@
 - hosts: nmt_server
   vars:
       user_name: newtranx
-      decoder_version: 8.0.7
+      decoder_version: 8.0.8
       dest_decoder_path: /home/{{user_name}}/decoder
       localhost_decoder_path: /home/newtranx/decoder
   tasks:
@@ -15,7 +15,7 @@
        dest: "{{ dest_decoder_path }}"
        mode: 0777
       with_fileglob:
-       - /home/newtranx/decoder/ansible_scripts/*.sh
+       - "{{localhost_decoder_path}}/ansible/ansible_scripts/*.sh"
 
     - name: 2.1.Copying specific volumes file to dest.
       copy: src={{localhost_decoder_path}}/ansible/ansible_scripts/inventory/{{server_id}}.volumes dest={{dest_decoder_path}}/volumes
