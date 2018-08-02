@@ -1,7 +1,7 @@
 - hosts: nmt_server
   vars:
       user_name: newtranx
-      decoder_version: 8.0.7
+      decoder_version: 8.0.9
       dest_decoder_path: /home/{{user_name}}/decoder
       localhost_decoder_path: /home/newtranx/decoder
       #target_volume: 2001

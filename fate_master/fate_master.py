@@ -21,8 +21,8 @@ def reboot(port, server_data):
     os.system('ansible-playbook refresh_decoder.yml --extra-vars "target_volume=' + port + '" -i tmp_host')
     print "Rebooting[port:%s] ... [%s]" % (port, server_data)
     logger.info("Rebooting[port:%s] ... [%s]" % (port, server_data))
-    print "Sleep 60s"
-    time.sleep(60)
+    print "Sleep 10s"
+    time.sleep(10)
     return
 
 
@@ -48,7 +48,7 @@ def check_slaves(url, port, server_data):
 if __name__ == "__main__":
     logger.info("Starting Main Program...")
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--duration', type=int, required=False,
+    parser.add_argument('-d', '--duration', type=float, required=False,
                         help="Duration between each checking, unit in min. default=1", default=1)
     parser.add_argument('--config', type=str, required=True,
                         help="nmtserver locations file")
@@ -65,16 +65,17 @@ if __name__ == "__main__":
         # commented
         if line[0] == '#':
             continue
+        print "Readling server config ....:", line
         # 192.168.50.6 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=6500 server_id=6
         serverdata = line.split()
         server = serverdata[0]
-        last_id = server.split(".")[-1]
+        last_id = serverdata[-1].split("=")[1]
         tmp_ports = codecs.open(args.inventory + "/" + last_id + ".volumes", 'r', encoding='utf8').readlines()
         server_entity.extend([(server, port.strip(), line) for port in tmp_ports])
     # ports = [server.split(":")[1] for server in servers]
-    print "Servers:", servers
+    print "Servers entities:", server_entity
     print "Starting fate master checker"
-    print "Duration of checking : %d mins" % args.duration
+    print "Duration of checking : %f mins" % args.duration
     # print "Server Entity:", server_entity
     # (server, port)
     while(True):
