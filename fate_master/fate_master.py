@@ -63,7 +63,7 @@ if __name__ == "__main__":
     server_entity = []
     for line in servers:
         # commented
-        if line[0] == '#':
+        if len(line) == 0 or line[0] == '#':
             continue
         print "Readling server config ....:", line
         # 192.168.50.6 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=6500 server_id=6
@@ -71,9 +71,13 @@ if __name__ == "__main__":
         server = serverdata[0]
         last_id = serverdata[-1].split("=")[1]
         tmp_ports = codecs.open(args.inventory + "/" + last_id + ".volumes", 'r', encoding='utf8').readlines()
-        server_entity.extend([(server, port.strip(), line) for port in tmp_ports])
+        server_entity.extend([(server, port.strip(), line) for port in tmp_ports if port.strip() != ""])
     # ports = [server.split(":")[1] for server in servers]
-    print "Servers entities:", server_entity
+    print "Writting Servers entities . . . ."
+    f = codecs.open("entities", "w", "utf-8")
+    for entity in server_entity:
+        f.write(str(entity) + "\n")
+    f.close()
     print "Starting fate master checker"
     print "Duration of checking : %f mins" % args.duration
     # print "Server Entity:", server_entity
