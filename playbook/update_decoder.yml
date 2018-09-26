@@ -5,9 +5,11 @@
       dest_decoder_path: /data/decoder
       localhost_decoder_path: /home/fanyi/ansible
   tasks:
+    - name: 0.Create dest decoder folder....
+      file: path={{dest_decoder_path}} state=directory
+
     - name: 1.Copying newest docker image to Remote server....
       synchronize: src={{localhost_decoder_path}}/image/newtranx_server-gpu.v{{decoder_version}}.tar.gz dest={{dest_decoder_path}}/
-      delegate_to: localhost
 
     - name: 2.Copying scripts to Remote Server....
       copy:
@@ -29,4 +31,3 @@
       shell: "./remove_online_all.sh {{decoder_version}}"
       args:
        chdir: "{{ dest_decoder_path }}"
-
