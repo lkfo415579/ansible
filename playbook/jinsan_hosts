@@ -1,0 +1,6 @@
+[nmt_server] # Group Name
+# JINSAN
+127.0.0.1 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=20002 server_id=1
+172.31.0.4 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=20002 server_id=4
+172.31.0.20 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=20002 server_id=20
+172.31.0.10 ansible_ssh_user=newtranx ansible_ssh_private_key_file=id_rsa ansible_ssh_port=20002 server_id=10
