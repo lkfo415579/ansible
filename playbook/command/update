@@ -1,0 +1,1 @@
+ansible-playbook update_decoder.yml -i beijing_hosts

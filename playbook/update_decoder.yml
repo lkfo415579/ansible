@@ -1,13 +1,15 @@
 - hosts: nmt_server
   vars:
-      user_name: newtranx
-      decoder_version: 8.0.8
-      dest_decoder_path: /home/{{user_name}}/decoder
-      localhost_decoder_path: /home/newtranx/decoder
+      user_name: fanyi
+      decoder_version: 8.1.4
+      dest_decoder_path: /data/decoder
+      localhost_decoder_path: /home/fanyi/ansible
   tasks:
+    - name: 0.Create dest decoder folder....
+      file: path={{dest_decoder_path}} state=directory
+
     - name: 1.Copying newest docker image to Remote server....
-      synchronize: src={{localhost_decoder_path}}/test_jenkins/newtranx_server-gpu.v{{decoder_version}}.tar.gz dest={{dest_decoder_path}}/
-      delegate_to: localhost
+      synchronize: src={{localhost_decoder_path}}/image/newtranx_server-gpu.v{{decoder_version}}.tar.gz dest={{dest_decoder_path}}/
 
     - name: 2.Copying scripts to Remote Server....
       copy:
@@ -15,10 +17,10 @@
        dest: "{{ dest_decoder_path }}"
        mode: 0777
       with_fileglob:
-       - "{{localhost_decoder_path}}/ansible/ansible_scripts/*.sh"
+       - "{{localhost_decoder_path}}/ansible_scripts/*.sh"
 
     - name: 2.1.Copying specific volumes file to dest.
-      copy: src={{localhost_decoder_path}}/ansible/ansible_scripts/inventory/{{server_id}}.volumes dest={{dest_decoder_path}}/volumes
+      copy: src={{localhost_decoder_path}}/ansible_scripts/inventory/{{server_id}}.volumes dest={{dest_decoder_path}}/volumes
 
     - name: 3.Loading Docker image...
       shell: "./load.sh {{decoder_version}}"
@@ -29,14 +31,3 @@
       shell: "./remove_online_all.sh {{decoder_version}}"
       args:
        chdir: "{{ dest_decoder_path }}"
-
-   # chdir: {{dest_decoder_path}}
-# debug: msg="{{dest_decoder_path}}/load.sh {{decoder_version}}"
-# command: "touch {{ dest_decoder_path }}/BB"
-# cmd:  ls
-# command: chdir={{dest_decoder_path}} "{{ dest_decoder_path }}/load.sh {{decoder_version}}"
-# become: yes
-# become_user: training
-# - name: Debuging
-#     debug: msg="HEY {{server_id}}"
-

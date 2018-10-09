@@ -1,7 +1,11 @@
 - hosts: nmt_server
   vars:
       user_name: newtranx
+<<<<<<< HEAD
       decoder_version: 8.1.5
+=======
+      decoder_version: 8.0.9
+>>>>>>> 39fd456a193e17a61702ac0b7a9bc41b1683548a
       dest_decoder_path: /home/{{user_name}}/decoder
   tasks:
     - name: 1.Restart dockers
