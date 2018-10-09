@@ -8,7 +8,7 @@ import time
 
 logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s[%(process)d] - %(name)s - %(message)s",
-                    filename='logs/logs'
+                    filename='logs/fate_logs'
                     )
 logger = logging.getLogger('NMTSERVER')
 
