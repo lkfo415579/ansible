@@ -8,7 +8,7 @@ import time
 
 logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s[%(process)d] - %(name)s - %(message)s",
-                    filename='logs/fate_logs'
+                    filename='logs/logs'
                     )
 logger = logging.getLogger('NMTSERVER')
 
@@ -30,10 +30,12 @@ def check_slaves(url, port, server_data):
     target_url = "http://" + url + ":" + port + "/translate"
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'apikey': '37447ebe06e5af07b6f8e8e168714e39'}
     try:
-        r = requests.post(target_url, data={'text': 'testing', 'detoken': 'true', 'nbest': '1'}, headers=headers, timeout=10)
-    except:
+        r = requests.post(target_url, data={'text': 'testing', 'detoken': 'true', 'nbest': '1'}, headers=headers,
+                          timeout=500)
+    except Exception, e:
         # server is down.
-        logger.info("500|%s|%s" % (target_url, "Server is down."))
+        logger.info("?|%s|%s" % (target_url, "Server is down."))
+        logger.error(e)
         reboot(port, server_data)
         return
     # normal 500 external error
